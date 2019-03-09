@@ -1,6 +1,8 @@
 package ch.heigvd.res.labio.impl;
 
 import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -20,7 +22,39 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
+    ArrayList<String> listString = new ArrayList<String>();
+    StringBuilder sb = new StringBuilder();
+
+    for(int i = 0; i < lines.length(); ++i){
+      String charString = Character.toString(lines.charAt(i));
+      sb.append(charString);
+
+      if(charString.contains("\n")){
+        listString.add(sb.toString());
+        sb.setLength(0); //Clear the String builder
+      } else if(charString.contains("\r")){
+          if(i + 1 < lines.length() && Character.toString(lines.charAt(i + 1)).contains("\n")) { //Possibility to have a \n after the \r
+            sb.append("\n");
+            ++i;
+          }
+          listString.add(sb.toString());
+          sb.setLength(0); //Clear the String builder
+      } else if(i + 1 == lines.length()){
+        listString.add(sb.toString());
+      }
+    }
+
+    if(!Pattern.matches(".*(?:[\n\r].*)+", lines)){
+      listString.add(0,"");
+    }else if(listString.size() < 2){
+      listString.add("");
+    }
+    //Convert the list to an String array.
+    String[] stringArray = new String[listString.size()];
+    listString.toArray(stringArray);
+    return stringArray;
+
   }
 
 }
