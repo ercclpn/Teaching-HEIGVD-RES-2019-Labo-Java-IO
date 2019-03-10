@@ -152,7 +152,7 @@ public class Application implements IApplication {
           try{
             writer.write(file.getPath()+"\n");
           }catch(IOException e){
-            return;
+            LOG.log(Level.SEVERE,"Could not print file name {0}",e.getMessage());
           }
       }
     });
