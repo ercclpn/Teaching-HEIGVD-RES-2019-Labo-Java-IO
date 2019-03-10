@@ -1,5 +1,7 @@
 package ch.heigvd.res.labio.impl;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -25,7 +27,7 @@ public class Utils {
 
     ArrayList<String> listString = new ArrayList<String>();
     StringBuilder sb = new StringBuilder();
-
+    Boolean rDetected = false;
     for(int i = 0; i < lines.length(); ++i){
       String charString = Character.toString(lines.charAt(i));
       sb.append(charString);
@@ -45,7 +47,7 @@ public class Utils {
       }
     }
 
-    if(!Pattern.matches(".*(?:[\n\r].*)+", lines)){
+    if(listString.size() == 1 && !( lines.contains("\n") || lines.contains("\r"))){
       listString.add(0,"");
     }else if(listString.size() < 2){
       listString.add("");
