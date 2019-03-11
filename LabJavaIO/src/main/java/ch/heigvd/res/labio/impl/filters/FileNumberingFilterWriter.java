@@ -4,6 +4,7 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
+import ch.heigvd.res.labio.impl.Utils;
 
 /**
  * This class transforms the streams of character sent to the decorated writer.
@@ -19,23 +20,75 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
+  private int nbLine = 1;
+  private Boolean detectR = false;
+  private Boolean firstCall = true;
+
   public FileNumberingFilterWriter(Writer out) {
     super(out);
   }
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    super.write(str,off,len);
+    //String strFormat = parserLine(str, off, len);
+   // super.write(strFormat,off,strFormat.length());
+    this.write(str.toCharArray(),off,len);
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    /*if(firstCall){
+      out.write(nbLine ++ + "\t");
+      firstCall = false;
+    }
+
+    for(int i = off; i < off + len; ++i){
+      String cString = Character.toString(cbuf[i]);
+
+      out.write(cString);
+
+      if(cString.contentEquals("\r")){
+        if(i < len && Character.toString(cbuf[i + 1]).contentEquals("\n")){
+          out.write("\n");
+          ++i;
+        }
+
+        out.write(nbLine++ + "\t");
+      }else if(cString.contentEquals("\n")){
+        out.write(nbLine++ + "\t");
+      }
+    }*/
+
+    for(int i = off; i < off + len ; ++i){
+      write(cbuf[i]);
+    }
+
+
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
 
+    Boolean newLine = false;
+
+    if(firstCall){
+      String lineValue = nbLine++ + "\t";
+      super.write(lineValue,0,lineValue.length());
+      firstCall = false;
+    }
+
+    String cString = Character.toString((char)c);
+
+    if(cString.contentEquals("\r")){
+      detectR = true;
+    }else if(cString.contentEquals("\n")){
+      cString = "\n" + nbLine++ + "\t";
+      detectR = false;
+    }else if(detectR){
+      detectR = false;
+      cString = nbLine++ + "\t" + cString;
+    }
+
+    super.write(cString,0,cString.length());
+  }
 }
