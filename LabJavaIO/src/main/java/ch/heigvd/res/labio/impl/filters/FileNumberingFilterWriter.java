@@ -30,34 +30,11 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    //String strFormat = parserLine(str, off, len);
-   // super.write(strFormat,off,strFormat.length());
     this.write(str.toCharArray(),off,len);
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    /*if(firstCall){
-      out.write(nbLine ++ + "\t");
-      firstCall = false;
-    }
-
-    for(int i = off; i < off + len; ++i){
-      String cString = Character.toString(cbuf[i]);
-
-      out.write(cString);
-
-      if(cString.contentEquals("\r")){
-        if(i < len && Character.toString(cbuf[i + 1]).contentEquals("\n")){
-          out.write("\n");
-          ++i;
-        }
-
-        out.write(nbLine++ + "\t");
-      }else if(cString.contentEquals("\n")){
-        out.write(nbLine++ + "\t");
-      }
-    }*/
 
     for(int i = off; i < off + len ; ++i){
       write(cbuf[i]);
@@ -68,8 +45,6 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-
-    Boolean newLine = false;
 
     if(firstCall){
       String lineValue = nbLine++ + "\t";
