@@ -30,7 +30,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    this.write(str.toCharArray(),off,len);
+    write(str.toCharArray(),off,len);
   }
 
   @Override
@@ -39,8 +39,6 @@ public class FileNumberingFilterWriter extends FilterWriter {
     for(int i = off; i < off + len ; ++i){
       write(cbuf[i]);
     }
-
-
   }
 
   @Override

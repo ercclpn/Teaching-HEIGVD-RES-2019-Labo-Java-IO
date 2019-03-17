@@ -1,6 +1,5 @@
 package ch.heigvd.res.labio.impl;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.logging.Logger;
 import java.util.ArrayList;
