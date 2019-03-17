@@ -132,7 +132,6 @@ public class Application implements IApplication {
     FileUtils.forceMkdir(new File(fullPath) );
     FileUtils.write(new File(fullPath + "/" + filename + ".utf8"),quote.getQuote());
 
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
   
   /**

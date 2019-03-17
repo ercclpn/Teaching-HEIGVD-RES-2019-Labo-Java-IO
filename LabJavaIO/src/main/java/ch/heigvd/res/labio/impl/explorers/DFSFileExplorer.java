@@ -19,7 +19,6 @@ public class DFSFileExplorer implements IFileExplorer {
 
   @Override
   public void explore(File rootDirectory, IFileVisitor vistor) {
-    //This comment is only for the commit to validate the DFSFileExplorerTest unit that is already validate while solving the ApplicationTest unit.
     vistor.visit(rootDirectory);
     if(rootDirectory.isDirectory()){
       File [] sortedList = rootDirectory.listFiles();

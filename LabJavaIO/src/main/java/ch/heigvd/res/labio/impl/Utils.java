@@ -4,7 +4,6 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.logging.Logger;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -27,7 +26,7 @@ public class Utils {
 
     ArrayList<String> listString = new ArrayList<String>();
     StringBuilder sb = new StringBuilder();
-    Boolean rDetected = false;
+
     for(int i = 0; i < lines.length(); ++i){
       String charString = Character.toString(lines.charAt(i));
       sb.append(charString);

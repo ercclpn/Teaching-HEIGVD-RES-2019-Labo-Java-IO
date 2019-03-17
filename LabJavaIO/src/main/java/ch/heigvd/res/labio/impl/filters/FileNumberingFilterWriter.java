@@ -4,7 +4,7 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
-import ch.heigvd.res.labio.impl.Utils;
+
 
 /**
  * This class transforms the streams of character sent to the decorated writer.
